@@ -8,7 +8,11 @@
     "start:dev": "ts-node-dev src/index.ts",
     "test:functional": "jest --projects ./test --runInBand",
     "lint": "eslint ./src ./test --ext .ts",
-    "lint:fix": "eslint ./src ./test --ext .ts --fix"
+    "lint:fix": "eslint ./src ./test --ext .ts --fix",
+    "test:unit": "jest",
+    "style:check": "prettier --check src/**/*.ts test/**/*.ts",
+    "style:fix": "prettier --write src/**/*.ts test/**/*.ts"
+
   },
   "repository": "git@github.com:vbeloti/surf-forecast-api.git",
   "author": "<viniciusbeloti7@gmail.com>",
@@ -23,6 +27,7 @@
     "@typescript-eslint/parser": "^4.0.1",
     "eslint": "^7.8.1",
     "jest": "^26.4.2",
+    "prettier": "^2.1.1",
     "supertest": "^4.0.2",
     "ts-jest": "^26.3.0",
     "ts-node-dev": "^1.0.0-pre.61",
