@@ -2,10 +2,9 @@ import { SetupServer } from '@src/server';
 import supertest from 'supertest';
 
 let server: SetupServer;
-beforeAll(async () => {
+beforeAll(() => {
   server = new SetupServer();
-  await server.init();
+  server.init();
   global.testRequest = supertest(server.getApp());
 });
 
-afterAll(async () => await server.close());
