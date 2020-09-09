@@ -39,15 +39,20 @@ export class StormGlass {
 
   }
   public async fetchPoints(lat: number, lng: number): Promise<ForecastPoint[]> {
-    const response = await this.request.get<StormGlassForecastReponse>(
-      `https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${this.stormGlassAPIParams}&source=${this.stormGlassAPISource}&end=1592113802`,
-      {
-        headers: {
-          Authorization: 'fake-token'
-        },
-      }
+    try {
+      const response = await this.request.get<StormGlassForecastReponse>(
+        `https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${this.stormGlassAPIParams}&source=${this.stormGlassAPISource}&end=1592113802`,
+        {
+          headers: {
+            Authorization: 'fake-token'
+          },
+        }
       );
-    return this.normalizedResponse(response.data);
+      return this.normalizedResponse(response.data);
+
+    } catch (error) {
+      throw new Error(`Undexpected error when trying to comunicate to StormGlass: ${error.message}`);
+    }
   }
 
   private normalizedResponse(points: StormGlassForecastReponse): ForecastPoint[] {
