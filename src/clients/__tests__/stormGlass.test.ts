@@ -41,4 +41,15 @@ describe('StormGlass client', () => {
     const response = await stormGlass.fetchPoints(lat, lng);
     expect(response).toEqual([]);
   });
+
+  it('Should get a generic error from StormGlass service when the request fail before reaching the service', async () => {
+    const lat = -33.792726;
+    const lng = 151.289824;
+
+    mockedAxios.get.mockRejectedValue({ message: 'Network Error' });
+
+    const stormGlass = new StormGlass(mockedAxios);
+
+    expect(stormGlass.fetchPoints(lat, lng)).rejects.toThrow('Undexpected error when trying to comunicate to StormGlass: Network Error');
+  });
 });
